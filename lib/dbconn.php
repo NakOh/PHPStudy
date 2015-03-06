@@ -1,6 +1,6 @@
 <?
     $connect=mysql_connect( "localhost", "kdhong", "1234") or  
-        die( "SQL server¿¡ ¿¬°áÇÒ ¼ö ¾ø½À´Ï´Ù."); 
+        die( "SQL serverì— ì—°ê²°í• ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
 
     mysql_select_db("kdhong_db",$connect);
 ?>

@@ -11,7 +11,7 @@
 <?
 	include "../lib/dbconn.php";
 
-	$scale=10;			// ÇÑ È­¸é¿¡ Ç¥½ÃµÇ´Â ±Û ¼ö
+	$scale=10;			// í•œ í™”ë©´ì— í‘œì‹œë˜ëŠ” ê¸€ì˜ ê°œìˆ˜
 
     if ($mode=="search")
 	{
@@ -19,7 +19,7 @@
 		{
 			echo("
 				<script>
-				 window.alert('°Ë»öÇÒ ´Ü¾î¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä!');
+				 window.alert('ê²€ìƒ‰í•  ë‹¨ì–´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”');
 			     history.go(-1);
 				</script>
 			");
@@ -35,18 +35,18 @@
 
 	$result = mysql_query($sql, $connect);
 
-	$total_record = mysql_num_rows($result); // ÀüÃ¼ ±Û ¼ö
+	$total_record = mysql_num_rows($result); // í™”ë©´ì— í‘œì‹œí•˜ëŠ” ì „ì²´ ê¸€ì˜ ê°œìˆ˜
 
-	// ÀüÃ¼ ÆäÀÌÁö ¼ö($total_page) °è»ê 
+	//ì „ì²´ í˜ì´ì§€ ìˆ˜ ê³„ì‚°
 	if ($total_record % $scale == 0)     
 		$total_page = floor($total_record/$scale);      
 	else
 		$total_page = floor($total_record/$scale) + 1; 
  
-	if (!$page)                 // ÆäÀÌÁö¹øÈ£($page)°¡ 0 ÀÏ ¶§
-		$page = 1;              // ÆäÀÌÁö ¹øÈ£¸¦ 1·Î ÃÊ±âÈ­
+	if (!$page)                 // í˜„ì¬í™”ë©´ì— í‘œì‹œë””ëŠ” í˜ì´ì§€ë¥¼ ì˜ë¯¸í•˜ëŠ”
+		$page = 1;              // $pageê°€ 0ì´ë¼ë©´ 1ë¡œ ì´ˆê¸°í™”
  
-	// Ç¥½ÃÇÒ ÆäÀÌÁö($page)¿¡ µû¶ó $start °è»ê  
+	// í‘œì‹œí•  í˜ì´ì§€ì— ë”°ë¼ startê³„ì‚°
 	$start = ($page - 1) * $scale;      
 
 	$number = $total_record - $start;
@@ -77,14 +77,14 @@
 
 		<form  name="board_form" method="post" action="list.php?mode=search"> 
 		<div id="list_search">
-			<div id="list_search1">¢¹ ÃÑ <?= $total_record ?> °³ÀÇ °Ô½Ã¹°ÀÌ ÀÖ½À´Ï´Ù.  </div>
+			<div id="list_search1">ì´ <?= $total_record ?> ê°œì˜ ê²Œì‹œë¬¼ì´ ìˆìŠµë‹ˆë‹¤  </div>
 			<div id="list_search2"><img src="../img/select_search.gif"></div>
 			<div id="list_search3">
 				<select name="find">
-                    <option value='subject'>Á¦¸ñ</option>
-                    <option value='content'>³»¿ë</option>
-                    <option value='nick'>º°¸í</option>
-                    <option value='name'>ÀÌ¸§</option>
+                    <option value='subject'>ì œëª©</option>
+                    <option value='content'>ë‚´ìš©</option>
+                    <option value='nick'>ë‹‰ë„¤ì„</option>
+                    <option value='name'>ì´ë¦„</option>
 				</select></div>
 			<div id="list_search4"><input type="text" name="search"></div>
 			<div id="list_search5"><input type="image" src="../img/list_search_button.gif"></div>
@@ -108,9 +108,9 @@
    for ($i=$start; $i<$start+$scale && $i < $total_record; $i++)                    
    {
       mysql_data_seek($result, $i);       
-      // °¡Á®¿Ã ·¹ÄÚµå·Î À§Ä¡(Æ÷ÀÎÅÍ) ÀÌµ¿  
+      // ê°€ì ¸ì˜¬ ë ˆì½”ë“œë¡œ ìœ„ì¹˜ ì´ë™
       $row = mysql_fetch_array($result);       
-      // ÇÏ³ªÀÇ ·¹ÄÚµå °¡Á®¿À±â
+      // í•˜ë‚˜ì˜ ë ˆì½”ë“œ ê°€ì ¸ì˜¤ê¸°
 	
 	  $item_num     = $row[num];
 	  $item_id      = $row[id];
@@ -136,12 +136,12 @@
    }
 ?>
 			<div id="page_button">
-				<div id="page_num"> ¢¸ ÀÌÀü &nbsp;&nbsp;&nbsp;&nbsp; 
+				<div id="page_num"> ì´ì „ &nbsp;&nbsp;&nbsp;&nbsp;
 <?
-   // °Ô½ÃÆÇ ¸ñ·Ï ÇÏ´Ü¿¡ ÆäÀÌÁö ¸µÅ© ¹øÈ£ Ãâ·Â
+   // ê²Œì‹œíŒ ëª©ë¡ í•˜ë‹¨ì— í˜ì´ì§€ ë²ˆí˜¸ ì¶œë ¥(í˜ì´ì§€ ë§í¬)
    for ($i=1; $i<=$total_page; $i++)
    {
-		if ($page == $i)     // ÇöÀç ÆäÀÌÁö ¹øÈ£ ¸µÅ© ¾ÈÇÔ
+		if ($page == $i)     // í˜„ì¬ í˜ì´ì§€ ë²ˆí˜¸ ë§í¬ ì•ˆí•¨
 		{
 			echo "<b> $i </b>";
 		}
@@ -151,7 +151,7 @@
 		}      
    }
 ?>			
-			&nbsp;&nbsp;&nbsp;&nbsp;´ÙÀ½ ¢º
+			&nbsp;&nbsp;&nbsp;&nbsp;ë‹¤ìŒ
 				</div>
 				<div id="button">
 					<a href="list.php?page=<?=$page?>"><img src="../img/list.png"></a>&nbsp;
